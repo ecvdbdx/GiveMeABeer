@@ -1,5 +1,5 @@
 module.exports = {
-  URL_API: 'https://api.ecv-bordeaux-demos.fr',
+  URL_API: 'http://192.168.0.62:8079',
   API_PORT: '8079',
 
   URL_ADMIN: 'https://admin.ecv-bordeaux-demos.fr',

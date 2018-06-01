@@ -1,13 +1,14 @@
 <template>
-  <div class="product col-md-4">
+  <div class="product col-xs-6">
     <div class="product-container" :class="{disabled: isOutOfStock || isBusy}" @click.prevent="sendProduct()">
       <div class="product-details">
-        <h2>{{product.name}}</h2>
-        <span>Restants: <span>{{product.current_stock}}</span></span>
-      </div>
-      <div class="product-image">
-        <img alt="Bootstrap Image Preview"
-             :src="`${settings.URL_API}/${product.image_url}`"/>
+        <div class="product-image">
+          <img alt="Bootstrap Image Preview"
+               :src="product.image"/>
+        </div>
+        <h2>{{product.label}}</h2>
+        <span>{{product.price}}€</span>
+        <!--<span>Restants: <span>{{product.current_stock}}</span></span>-->
       </div>
     </div>
     <loader v-if="loading"></loader>
@@ -15,8 +16,11 @@
 </template>
 
 <script>
+
+  /* eslint-disable no-console */
+  // import axios from 'axios';
   import * as settings from './../../../shared/config';
-  import * as events from './../../../shared/events';
+  // import * as events from './../../../shared/events';
   import Loader from './Loader';
 
   export default {
@@ -30,8 +34,12 @@
     },
     methods: {
       sendProduct() {
-        this.loading = true;
-        this.$socket.emit(events.PRODUCT, this.product.machine_id);
+        // this.loading = true;
+        // axios.post('/order', { id: this.product._id })
+        // .then((response) => {
+          // console.log(response);
+        // });
+        // this.$socket.emit(events.PRODUCT, this.product.machine_id);
       },
     },
     socket: {
@@ -69,6 +77,8 @@
   .product {
     display: flex;
     align-items: center;
+    transition: all 0.4s ease;
+    margin: 15px 0;
   }
 
   .product-image {
@@ -81,21 +91,14 @@
     width: 50%;
   }
 
-  .product.col-md-4 {
+  .product-container {
     display: flex;
-    transition: all 0.4s ease;
-    padding: 15px;
-    margin: 0 15px 18px 15px;
-    border: 1px solid rgba(0, 0, 0, 0.09);
+    width: 100%;
+     border: 1px solid rgba(0, 0, 0, 0.09);
     border-radius: 3px;
     -webkit-box-shadow: 9px 9px 28px -10px rgba(0, 0, 0, 0.17);
     -moz-box-shadow: 9px 9px 28px -10px rgba(0, 0, 0, 0.17);
     box-shadow: 9px 9px 28px -10px rgba(0, 0, 0, 0.17);
-  }
-
-  .product-container {
-    display: flex;
-    width: 100%;
   }
 
   .product-container.disabled {
@@ -113,7 +116,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 50%;
+    width: 100%;
   }
 
   .product-details span {
