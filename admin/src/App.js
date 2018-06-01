@@ -1,18 +1,77 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom'
+
+import './styles/App.css';
+
+import Navigation from './components/Navigation'
+import ConfigMachine from './components/ConfigMachine'
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.machines = [{
+      id: 1,
+      label: 'Machine 1',
+      addressPoint: 'https://192.168.1.134',
+      rows: [{
+        position: 1,
+        slots: [{
+          label: 'A21',
+          product: 'object',
+          stock: 10,
+          position: 1
+        },
+        {
+          label: 'A22',
+          product: 'object',
+          stock: 5,
+          position: 2
+        }]
+      },
+      {
+        position: 2,
+        slots: [{
+          label: 'A23',
+          product: 'object',
+          stock: 10,
+          position: 1
+        }]
+      }]
+    },
+    {
+      id: 2,
+      label: 'Machine 2',
+      addressPoint: 'https://192.168.1.128',
+      rows: [{
+        position: 2,
+        slots: [{
+          label: 'A21',
+          product: 'object',
+          stock: 10,
+          position: 2
+        }]
+      }]
+    }];
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Router>
+          <div className="container">
+            <Navigation />
+          <div className="content">
+              <Route exact path="/configMachine" render={(props) => (
+                  <ConfigMachine {...props} machines={this.machines} />
+                )}/>
+            </div>
+          </div>
+        </Router>
+
       </div>
     );
   }
