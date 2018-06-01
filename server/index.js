@@ -29,6 +29,10 @@ app.get("/", (req, res) => {
   res.send("Test");
 });
 
+app.get("/products", productsController.getProducts);
+
+app.get("/product/:id", productsController.getProduct);
+
 app.post("/product", productsController.addProduct);
 app.post("/order", productsController.addOrder);
 
