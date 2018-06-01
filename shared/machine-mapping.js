@@ -1,25 +1,4 @@
 module.exports = [
-  {
-    pin_line: 33,
-    pin_row: 37,
-    duration: 5.38
-  },
-  {
-    pin_line: 31,
-    pin_row: 7,
-    duration: 5.28
-  },
-  {
-    pin_line: 35,
-    pin_row: 13,
-    duration: 5.45
-  },
-  {
-    pin_line: 32,
-    pin_row: 16,
-    duration: 5.28
-  },
-
   // ROW 1
   {
     pin_line: 32,
