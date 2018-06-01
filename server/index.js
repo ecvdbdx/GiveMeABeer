@@ -19,6 +19,7 @@ require("./models/Machine");
 const productsController = require("./controllers/products");
 const debugController = require("./controllers/debug");
 const machinesController = require("./controllers/machines");
+const orderController = require("./controllers/order");
 const app = express();
 
 app.use(
@@ -41,6 +42,8 @@ app.get("/product/:id", productsController.getProduct);
 app.post("/product", productsController.addProduct);
 
 app.post("/machine", machinesController.addMachine);
+
+app.post("/order", orderController.createOrder);
 
 const http = require("http").Server(app);
 
