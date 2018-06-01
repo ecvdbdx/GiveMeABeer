@@ -17,11 +17,9 @@ require("./models/Product");
 require("./models/Machine");
 
 const productsController = require("./controllers/products");
-<<<<<<< HEAD
-const debugController = require("./controllers/debug");
-=======
 const machinesController = require("./controllers/machines");
->>>>>>> :sparkles: Add machine model and addMachine controller
+const debugController = require("./controllers/debug");
+
 const app = express();
 
 app.use(
