@@ -16,6 +16,7 @@ mongoose.Promise = global.Promise;
 require("./models/Product");
 
 const productsController = require("./controllers/products");
+const debugController = require("./controllers/debug");
 const app = express();
 
 app.use(
@@ -35,6 +36,8 @@ app.get("/product/:id", productsController.getProduct);
 
 app.post("/product", productsController.addProduct);
 app.post("/order", productsController.addOrder);
+
+app.post("/debug/slot", debugController.debugMachineSlot);
 
 const http = require("http").Server(app);
 
