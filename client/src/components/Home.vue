@@ -23,8 +23,8 @@
   import axios from 'axios';
   import Product from './Product';
   import Poppin from './Poppin';
-  import * as settings from '../../../../settings';
-  import * as events from '../../../../socket-events';
+  import * as settings from './../../../shared/config';
+  import * as events from './../../../shared/events';
   import Navigation from './Navigation';
 
   export default {

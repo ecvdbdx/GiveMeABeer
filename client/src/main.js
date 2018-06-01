@@ -3,7 +3,7 @@ import VueWebsocket from 'vue-websocket';
 
 import App from './App';
 import router from './router';
-import * as settings from '../../../settings';
+import * as settings from './../../shared/config';
 
 Vue.config.productionTip = false;
 
