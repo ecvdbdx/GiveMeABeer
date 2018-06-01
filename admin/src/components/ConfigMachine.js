@@ -38,7 +38,7 @@ class ConfigMachine extends Component {
           {
             this.renderMachineRow()
           }
-          <div className="rowItem add" onClick={() => this.handleAddRack()}>
+          <div className="rowItem add" onClick={() => this.handleAddRow()}>
             Ajouter un rack
           </div>
         </div>
@@ -49,15 +49,33 @@ class ConfigMachine extends Component {
   renderMachineRow() {
     const { machine } = this.state;
 
-    return machine.rows.map((row) => <MachineRow key={row.position} row={row}/>);
+    return machine.rows.map((row, index) => <MachineRow key={index} row={row} handleAddSlot={(row) => this.handleAddSlot(row)}/>);
   }
 
   handleEditMachine() {
     const { machine } = this.state;
 
-    console.log(machine);
+
   }
 
+  handleAddRow() {
+    let { machine } = this.state;
+    let row = {
+      position: machine.rows.length + 1,
+      slots:[]
+    };
+    machine.rows.push(row);
+    this.setState({machine});
+  }
+
+  handleAddSlot(row) {
+    const { machine } = this.state;
+    this.setState({machine});
+  }
+
+  handleAddMachine() {
+    console.log('addMachine');
+  }
 
   render() {
     return (

@@ -4,35 +4,41 @@ import PropTypes from 'prop-types';
 import MachineSlot from './MachineSlot'
 
 class MachineRow extends Component {
-  constructor(props) {
-    super(props);
-
-  }
-
-
   renderSlot() {
     const { row } = this.props;
 
     return row.slots.map((slot) => <MachineSlot key={slot.position} slot={slot}/>);
   }
 
+  addSlot() {
+    let { row, handleAddSlot } = this.props;
+    let slot = {
+      label: 'A23',
+      product: 'object',
+      stock: 0,
+      position: row.slots.length + 1
+    };
+    row.slots.push(slot);
+    handleAddSlot(row);
+  }
+
   render() {
-    const { row } = this.props;
     return (
       <div className="rowItem">
+        <span className="slotItem add" onClick={() => this.addSlot()}>
+          +
+        </span>
         {
           this.renderSlot()
         }
-        <span className="slotItem add">
-          +
-        </span>
       </div>
     );
   }
 }
 
 MachineRow.propTypes = {
-  row: PropTypes.object.isRequired
+  row: PropTypes.object.isRequired,
+  handleAddSlot: PropTypes.func.isRequired
 };
 
 export default MachineRow;

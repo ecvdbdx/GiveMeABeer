@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
-  Route,
-  Link
+  Route
 } from 'react-router-dom'
 
 import './styles/App.css';
@@ -18,6 +17,7 @@ class App extends Component {
       label: 'Machine 1',
       addressPoint: 'https://192.168.1.134',
       rows: [{
+        id: 1,
         position: 1,
         slots: [{
           label: 'A21',
@@ -33,6 +33,7 @@ class App extends Component {
         }]
       },
       {
+        id: 2,
         position: 2,
         slots: [{
           label: 'A23',
@@ -47,6 +48,7 @@ class App extends Component {
       label: 'Machine 2',
       addressPoint: 'https://192.168.1.128',
       rows: [{
+        id: 3,
         position: 2,
         slots: [{
           label: 'A21',
