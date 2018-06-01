@@ -3,14 +3,7 @@ import PropTypes from 'prop-types';
 
 
 class MachineSlot extends Component {
-  constructor(props) {
-    super(props);
-
-  }
-
-
-
-  render() {
+render() {
     const { slot } = this.props;
     return (
       <span className="slotItem">
