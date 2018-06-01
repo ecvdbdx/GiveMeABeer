@@ -2,6 +2,9 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
+const events = require("../shared/events");
+const config = require("../shared/config");
+
 mongoose.connect("mongodb://localhost/give-me-a-beer");
 mongoose.connection.on("error", err => {
   console.log(err);
@@ -22,6 +25,25 @@ app.use(
 );
 app.use(bodyParser.json());
 
-app.post("/add-product", productsController.addProduct);
+app.get("/", (req, res) => {
+  res.send("Test");
+});
 
-app.listen("8079");
+app.post("/product", productsController.addProduct);
+app.post("/order", productsController.addOrder);
+
+const http = require("http").Server(app);
+
+/* Socket.io bootstrap */
+
+const io = require("socket.io")(http);
+
+io.on("connection", socket => {
+  console.log("a user connected");
+});
+
+/* app startup */
+
+http.listen(config.API_PORT, () => {
+  console.log(`Express running on port 8079`);
+});
