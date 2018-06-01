@@ -21,19 +21,6 @@ module.exports.addProduct = (req, res, next) => {
   next();
 };
 
-module.exports.addOrder = (req, res) => {
-  const client = clientio.connect(
-    `${config.URL_RASPBERRY}:${config.PORT_RASPBERRY}`
-  );
-
-  const { slot } = req.body;
-
-  client.emit(events.ORDER_PLACED, {
-    label: "TEST",
-    slot
-  });
-};
-
 module.exports.getProducts = async (req, res) => {
   const products = await Product.find({});
   res.send(products);
