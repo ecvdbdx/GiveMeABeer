@@ -12,5 +12,5 @@ module.exports.debugMachineSlot = (req, res) => {
 
   client.emit(events.DEBUG_SLOT, slot);
 
-  client.disconnect();
+  res.send();
 };

@@ -1,6 +1,5 @@
 module.exports = {
   CONNECTION: 'connection',
-  DISCONNECT: 'disconnect',
 
   PROCESSING: 'processing',
   PROCESSING_DONE: 'processing_done',

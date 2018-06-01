@@ -19,15 +19,15 @@ io.on(events.CONNECTION, (socket) => {
     debug('New client connected: %s', socket.handshake.address);
 
     socket.on(events.ORDER_PLACED, (product) => {
-        debug('New product requested: %s', product);
+        debug('New product requested: %s', product.label);
         
         debug('Emit new event: %s', events.PROCESSING);
         client.emit(events.PROCESSING);
 
-        if (machine[product]) {
+        if (machine[product.slot]) {
             distributeProduct(product);
         } else {
-            debug('Product not found: %s', product);
+            debug('Product not found: %s', product.label);
 
             debug('Emit new event: %s', events.PROCESSING_DONE);
             client.emit(events.PROCESSING_DONE);
@@ -43,10 +43,6 @@ io.on(events.CONNECTION, (socket) => {
             debug('Slot not found: %s', slot);
         }
     });
-});
-
-io.on(events.DISCONNECT, (socket) => {
-    debug('Client connected: %s', socket.handshake.address);
 });
 
 function distributeProduct(product) {
