@@ -1,17 +1,43 @@
 import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
-  Route
-} from 'react-router-dom'
+  Route,
+  Link
+} from 'react-router-dom';
 
 import './styles/App.css';
 
-import Navigation from './components/Navigation'
-import ConfigMachine from './components/ConfigMachine'
+import Navigation from './components/Navigation';
+import ConfigMachine from './components/ConfigMachine';
+
+import Produits from './components/Produits';
 
 class App extends Component {
   constructor(props) {
     super(props);
+    this.produits = [{
+      id:1,
+      label:'Twix',
+      description:'Barre de chocolat',
+      image:'image.png',
+      price:'1',
+      allergies:['sida','cancer','obésité'],
+      categories:['gouter','dessert','manger','miam'],
+      Kcal:'75',
+      quantite:12,
+    },
+    {
+      id:2,
+      label:'Kit-Kat',
+      description:'Barre de chocolat',
+      image:'image.png',
+      price:'1',
+      allergies:['sida','cancer','obésité'],
+      categories:['gouter','dessert','manger','miam'],
+      Kcal:'100',
+      quantite:33,
+    }]
+
     this.machines = [{
       id: 1,
       label: 'Machine 1',
@@ -69,6 +95,9 @@ class App extends Component {
           <div className="content">
               <Route exact path="/configMachine" render={(props) => (
                   <ConfigMachine {...props} machines={this.machines} />
+                )}/>
+              <Route exact path="/produits" render={(props) => (
+                  <Produits {...props} produits={this.produits}/>
                 )}/>
             </div>
           </div>

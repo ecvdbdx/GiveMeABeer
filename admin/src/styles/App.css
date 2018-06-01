@@ -76,3 +76,19 @@
 .slotItem.add {
   cursor: pointer;
 }
+
+.product-table {
+  width:100%;
+  border-collapse: collapse;
+}
+
+.product-table thead tr th, .product-table tbody tr td {
+  border-bottom:1px solid grey;
+  border-spacing: 0px;
+  padding:5px;
+  text-align:center;
+}
+
+.product-row:hover {
+  background: rgba(12, 24, 36, 0.6);
+}
