@@ -15,8 +15,8 @@
 </template>
 
 <script>
-  import * as settings from '../../../../settings';
-  import * as events from '../../../../socket-events';
+  import * as settings from './../../../shared/config';
+  import * as events from './../../../shared/events';
   import Loader from './Loader';
 
   export default {
