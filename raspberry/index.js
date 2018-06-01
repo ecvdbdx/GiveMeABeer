@@ -38,7 +38,7 @@ io.on(events.CONNECTION, (socket) => {
         debug('Debug slot: %s', slot);
 
         if (machine[slot - 1]) {
-            turnMotor(slot);
+            turnMotor(slot - 1);
         } else {
             debug('Slot not found: %s', slot);
         }
@@ -48,7 +48,7 @@ io.on(events.CONNECTION, (socket) => {
 function distributeProduct(product) {
     debug('Start distributing product: %s', product.label);
 
-    turnMotor(product.slot);
+    turnMotor(product.slot - 1);
 
     debug('Finished distributing product: %s', product.slot);
 
