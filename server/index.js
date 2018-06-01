@@ -19,7 +19,17 @@ require("./models/Machine");
 const productsController = require("./controllers/products");
 const debugController = require("./controllers/debug");
 const machinesController = require("./controllers/machines");
+const orderController = require("./controllers/order");
 const app = express();
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  next();
+});
 
 app.use(
   bodyParser.urlencoded({
@@ -41,6 +51,8 @@ app.get("/product/:id", productsController.getProduct);
 app.post("/product", productsController.addProduct);
 
 app.post("/machine", machinesController.addMachine);
+
+app.post("/order", orderController.createOrder);
 
 const http = require("http").Server(app);
 
