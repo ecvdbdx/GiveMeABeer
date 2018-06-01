@@ -45,7 +45,7 @@ io.on(events.CONNECTION, (socket) => {
     });
 });
 
-io.on(event.DISCONNECT, (socket) => {
+io.on(events.DISCONNECT, (socket) => {
     debug('Client connected: %s', socket.handshake.address);
 });
 
