@@ -33,23 +33,41 @@ io.on(events.CONNECTION, (socket) => {
             client.emit(events.PROCESSING_DONE);
         }
     });
+
+    socket.on(events.DEBUG_SLOT, (slot) => {
+        debug('Debug slot: %s', slot);
+
+        if (machine[slot - 1]) {
+            turnMotor(slot);
+        } else {
+            debug('Slot not found: %s', slot);
+        }
+    });
+});
+
+io.on(event.DISCONNECT, (socket) => {
+    debug('Client connected: %s', socket.handshake.address);
 });
 
 function distributeProduct(product) {
-    debug('Start distributing product: %s', product);
+    debug('Start distributing product: %s', product.label);
 
-    rpio.open(machine[product].pin_line, rpio.OUTPUT, rpio.HIGH);
-    rpio.open(machine[product].pin_row, rpio.OUTPUT, rpio.HIGH);
-    rpio.write(machine[product].pin_line, rpio.LOW);
-    rpio.write(machine[product].pin_row, rpio.LOW);
-    rpio.sleep(machine[product].duration);
-    rpio.write(machine[product].pin_line, rpio.HIGH);
-    rpio.write(machine[product].pin_row, rpio.HIGH);
+    turnMotor(product.slot);
 
-    debug('Finished distributing product: %s', product);
+    debug('Finished distributing product: %s', product.slot);
 
     debug('Emit new event: %s', events.PROCESSING_DONE);
     client.emit(events.PROCESSING_DONE);
+}
+
+function turnMotor(slot) {
+    rpio.open(machine[slot].pin_line, rpio.OUTPUT, rpio.HIGH);
+    rpio.open(machine[slot].pin_row, rpio.OUTPUT, rpio.HIGH);
+    rpio.write(machine[slot].pin_line, rpio.LOW);
+    rpio.write(machine[slot].pin_row, rpio.LOW);
+    rpio.sleep(machine[slot].duration);
+    rpio.write(machine[slot].pin_line, rpio.HIGH);
+    rpio.write(machine[slot].pin_row, rpio.HIGH);
 }
 
 http.listen(config.PORT_RASPBERRY, '0.0.0.0', () => {
