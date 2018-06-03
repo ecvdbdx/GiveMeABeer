@@ -9,12 +9,10 @@ module.exports.createOrder = async (req, res, next) => {
   const { id } = req.body;
 
   const machine = await Machine.findOne({}, {}, { sort: { 'created_at' : -1 } });
-  let postition = null;
+  let position = null;
   machine.rows.forEach((row) => {
     row.slots.forEach((slot) => {
-      console.log("1", slot)
       if (slot.productId === id) {
-        console.log("2");
         position = (row.position - 1) * 8 + slot.position;
       }
     });
